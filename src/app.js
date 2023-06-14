@@ -6,6 +6,7 @@ import { apiRouter } from './routers/api/apiRouter.js'
 import { webRouter } from './routers/web/webRouter.js'
 import { engine } from 'express-handlebars'
 import { extraerCredenciales } from './middlewares/auth.js'
+import { errorHandler } from './middlewares/errorHandler.js'
 
 export const app = express()
 
@@ -20,6 +21,7 @@ app.use(passport.initialize())
 app.use('/api', apiRouter)
 app.use('/', webRouter)
 
+app.use(errorHandler)
 
 app.engine('handlebars', engine())
 app.set('views', './views')
